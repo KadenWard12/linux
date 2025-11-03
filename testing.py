@@ -3,3 +3,7 @@ def hello():
 
 for i in range(3):
     hello()
+
+x = 'and the updating works!!'
+
+print(x)
