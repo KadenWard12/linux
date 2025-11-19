@@ -41,11 +41,11 @@ while True:
 
 # Choose a strategy to test
 strategies = inspect.getmembers(strats, inspect.isfunction)
-strategy_names = [name.lower() for name, func in strategies]
+strategy_names = {name.lower(): func for name, func in strategies}
 # Check if stratergies are available
 if len(strategies) > 0:
     print('Available strategies:')
-    for name, fun in strategies:
+    for name, func in strategies:
         print(name)
     
     while True:
@@ -53,6 +53,9 @@ if len(strategies) > 0:
         # Check if chosen strat matches available
         if strat in strategy_names:
             print(f'Using {strat} strategy')
+            for i in range(3):
+                print('...')
+            chosen_strat = strategy_names[strat]
             break
         else:
             print('Strategy not found, try again.')

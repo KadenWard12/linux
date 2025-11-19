@@ -17,7 +17,7 @@ strategy_names = {name.lower(): func for name, func in strategies}
 # Check if stratergies are available
 if len(strategies) > 0:
     print('Available strategies:')
-    for name, fun in strategies:
+    for name, func in strategies:
         print(name)
     
     while True:
@@ -40,7 +40,17 @@ sig = inspect.signature(chosen_strat)
 # Prompt for function inputs
 if sig.parameters:
     print(f'Function expects these parameters: {sig}')
+    print(sig.parameters.items())
 
+user_input = {}
+
+for name, param in sig.parameters.items():
+    if name == "df":
+        continue
+    x= input(f'Choose a value for {name}: ')
+    user_input[name] = x
+
+print(user_input)
 
 # Call strategy with inputs
 #chosen_strat()

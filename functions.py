@@ -41,4 +41,3 @@ def compute_returns(df):
 def backtest(df):
     """Combine signals and returns to simulate a trading strategy."""
     pass
-
