@@ -5,7 +5,10 @@ import pandas as pd
 import numpy as np
 import os
 import yfinance as yf
-from functions import download_data
+import functions
+import strats
+import inspect
+import sys
 
 # List all .csv files
 files = [f for f in os.listdir('data') if f.endswith('.csv')]
@@ -26,12 +29,33 @@ while True:
                     print('Ticker symbol not found in existing data.')
             break
         elif x in ('N', 'NO'):
-            ticker = download_data()
+            ticker = functions.download_data()
             break
         else:
             print('Incorrect answer')
             continue
      # If no files prompt for new ticker symbol
     else:
-        ticker = download_data()
+        ticker = functions.download_data()
+        break
 
+# Choose a strategy to test
+strategies = inspect.getmembers(strats, inspect.isfunction)
+strategy_names = [name.lower() for name, func in strategies]
+# Check if stratergies are available
+if len(strategies) > 0:
+    print('Available strategies:')
+    for name, fun in strategies:
+        print(name)
+    
+    while True:
+        strat = input('Choose a strategy: ').strip().lower()
+        # Check if chosen strat matches available
+        if strat in strategy_names:
+            print(f'Using {strat} strategy')
+            break
+        else:
+            print('Strategy not found, try again.')
+else:
+    print('No strategies found.')
+    sys.exit()

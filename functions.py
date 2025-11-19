@@ -5,6 +5,12 @@ import pandas as pd
 import numpy as np
 import os
 import yfinance as yf
+import matplotlib
+matplotlib.use('TkAgg')  # use this to plot graph as a popup
+import matplotlib.pyplot as plt
+import matplotlib.dates as mdates
+import strats
+
 
 # Download price data as .csv
 def download_data():
@@ -16,14 +22,17 @@ def download_data():
             continue
         else:
             print(f'{ticker} data successfully stored')
-            df.to_csv(f"data/{ticker}.csv")
+            df.reset_index(inplace=True)
+            df.to_csv(f"data/{ticker}.csv", index=False)
+            clean_csv(ticker)
             break
     return ticker
 
-def generate_signals(df, short_window, long_window):
-    """Create trading signals (e.g., moving average crossover)."""
-    
-    pass
+# Remove weird first row 
+def clean_csv(ticker):
+    df = pd.read_csv(f'data/{ticker}.csv')
+    df = df.drop(index=0).reset_index(drop=True)
+    df.to_csv(f"data/{ticker}.csv", index=False)
 
 def compute_returns(df):
     """Calculate daily and cumulative returns."""
