@@ -9,6 +9,7 @@ import functions
 import strats
 import inspect
 import sys
+import sims
 
 # List all .csv files
 files = [f for f in os.listdir('data') if f.endswith('.csv')]
@@ -100,9 +101,13 @@ while True:
         print('...')
 
 # Compute returns
-#returns_df = compute_returns(results_df)
+#returns_df = functions.compute_returns(results_df)
 
-result_df.to_csv("results.csv")
+# Backtest
+#backtest_df = functions.backtest(returns_df)
+
+# Run a statistical simulation
+#sims.monte()
 
 # Closes script, allows graphs to stay open as script doesnt auto close
 functions.exit_script()

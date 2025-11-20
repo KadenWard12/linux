@@ -15,3 +15,4 @@ def monte():
     # Use input for different stratergies
         # SMA_Cross will use fixed LongMA, and a range of ShortMA
         # up to five LongMA inputs at a time to generate one graph with five plots on the same x axis
+    pass
